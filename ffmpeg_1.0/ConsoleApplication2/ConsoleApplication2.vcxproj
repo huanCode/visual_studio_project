@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C817353A-7857-4731-9438-81F5B6094E66}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ConsoleApplication2</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_ISOC99_SOURCE;_LARGEFILE_SOURCE;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;HAVE_AV_CONFIG_H;_WIN32_WINNT=0x0502;_FILE_OFFSET_BITS=64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>C:\github\ffmpeg_source_analysis_3.3\compat\atomics\win32;C:\ffmpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>.\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>avcodec.lib;avutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\config.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\aiff.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\apetag.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asf.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asfcrypt.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ast.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\audiointerleave.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avformat.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avi.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio_internal.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avlanguage.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\caf.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\dv.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ffm.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ffmeta.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flacenc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flac_picture.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flv.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\gxf.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hevc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\http.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\httpauth.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v1.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v2.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\img2.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\internal.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ircam.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\isom.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\lrc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\matroska.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\metadata.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mms.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\movenc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\movenccenc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov_chan.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpeg.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpegts.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mxf.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\network.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\nut.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\oggdec.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\oma.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\options_table.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\os_support.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\pcm.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\qtpalette.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rawdec.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rawenc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rdt.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\replaygain.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riff.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rm.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rmsipr.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rso.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sauce.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\smjpeg.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sox.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\spdif.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtp.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\subtitles.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\swf.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tee_common.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\url.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\urldecode.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\version.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\voc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\vorbiscomment.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\vpcc.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\w64.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\wtv.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\wv.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\yuv4mpeg.h" />
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavutil\rational.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\allformats.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asf.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\async.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\aviobuf.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\cache.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\concat.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\crypto.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\cutils.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\data_uri.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\dump.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\file.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\file_open.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flvdec.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\format.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ftp.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\golomb_tab.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\gopher.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hls.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hlsproto.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\http.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\httpauth.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\icecast.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v1.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v2.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\isom.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\log2_tab.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\md5proto.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\metadata.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mms.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mmsh.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mmst.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov_chan.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpegts.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mux.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\network.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\options.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\os_support.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\prompeg.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\protocols.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\qtpalette.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\replaygain.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riff.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riffdec.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sdp.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtp.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtpproto.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\subfile.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tcp.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\teeproto.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tee_common.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\udp.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\url.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\urldecode.c" />
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\utils.c" />
+    <ClCompile Include="ConsoleApplication2.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

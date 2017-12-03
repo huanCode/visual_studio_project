@@ -1,0 +1,126 @@
+﻿  stdafx.cpp
+  utils.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\utils.c(5474): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  urldecode.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\urldecode.c(87): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  url.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\url.c(164): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  udp.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\udp.c(1185): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  tee_common.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\tee_common.c(69): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  teeproto.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\teeproto.c(148): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  tcp.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\tcp.c(303): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  subfile.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\subfile.c(150): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  srtpproto.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\srtpproto.c(147): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  srtp.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\srtp.c(326): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  sdp.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\sdp.c(839): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  riffdec.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\riffdec.c(299): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  riff.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\riff.c(577): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  replaygain.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\replaygain.c(106): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  qtpalette.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\qtpalette.c(117): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  protocols.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\protocols.c(147): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  prompeg.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\prompeg.c(482): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  os_support.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\os_support.c(336): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  options.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\options.c(160): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  network.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\network.c(336): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  正在生成代码...
+  正在编译...
+  mux.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mux.c(1455): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mpegts.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mpegts.c(2985): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mov_chan.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mov_chan.c(599): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mov.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mov.c(6560): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mmst.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mmst.c(640): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mmsh.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mmsh.c(423): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  mms.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\mms.c(152): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  metadata.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\metadata.c(71): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  md5proto.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\md5proto.c(97): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  log2_tab.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\log2_tab.c(2): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  isom.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\isom.c(652): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  id3v2.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\id3v2.c(1166): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  id3v1.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\id3v1.c(254): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  icecast.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\icecast.c(221): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  httpauth.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\httpauth.c(291): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  http.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\http.c(1703): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  hlsproto.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\hlsproto.c(329): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  hls.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\hls.c(2159): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  gopher.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\gopher.c(126): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  golomb_tab.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\golomb_tab.c(2): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  正在生成代码...
+  正在编译...
+  ftp.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\ftp.c(1126): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  format.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\format.c(371): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  flvdec.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\flvdec.c(1312): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  file_open.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\file_open.c(2): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  file.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(46): warning C4005: “S_ISFIFO”: 宏重定义
+  c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(44): note: 参见“S_ISFIFO”的前一个定义
+c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(55): warning C4005: “S_ISLNK”: 宏重定义
+  c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(53): note: 参见“S_ISLNK”的前一个定义
+c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(64): warning C4005: “S_ISSOCK”: 宏重定义
+  c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(62): note: 参见“S_ISSOCK”的前一个定义
+c:\github\ffmpeg_source_analysis_3.3\libavformat\file.c(399): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  dump.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\dump.c(629): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  data_uri.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\data_uri.c(119): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  cutils.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\cutils.c(40): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  crypto.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\crypto.c(407): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  concat.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\concat.c(198): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  cache.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\cache.c(331): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  aviobuf.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\aviobuf.c(1388): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  avio.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\avio.c(676): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  async.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\async.c(565): warning C4005: “OFFSET”: 宏重定义
+  c:\github\ffmpeg_source_analysis_3.3\libavformat\async.c(465): note: 参见“OFFSET”的前一个定义
+c:\github\ffmpeg_source_analysis_3.3\libavformat\async.c(700): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  asf.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\asf.c(179): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  allformats.c
+c:\github\ffmpeg_source_analysis_3.3\libavformat\allformats.c(404): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  正在生成代码...

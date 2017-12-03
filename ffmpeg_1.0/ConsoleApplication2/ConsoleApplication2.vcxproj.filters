@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="avutil">
+      <UniqueIdentifier>{b0b68fd5-9e4e-463d-a799-b6fa56a20298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="avformat">
+      <UniqueIdentifier>{067623a0-d434-457f-8adf-0b1e34d387ae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\aiff.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\apetag.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asf.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asfcrypt.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ast.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\audiointerleave.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avformat.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avi.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio_internal.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avlanguage.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\caf.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\dv.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ffm.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ffmeta.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flac_picture.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flacenc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flv.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\gxf.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hevc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\http.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\httpauth.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v1.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v2.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\img2.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\internal.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ircam.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\isom.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\lrc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\matroska.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\metadata.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mms.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov_chan.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\movenc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\movenccenc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpeg.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpegts.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mxf.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\network.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\nut.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\oggdec.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\oma.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\options_table.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\os_support.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\pcm.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\qtpalette.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rawdec.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rawenc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rdt.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\replaygain.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riff.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rm.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rmsipr.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\rso.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sauce.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\smjpeg.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sox.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\spdif.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtp.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\subtitles.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\swf.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tee_common.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\url.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\urldecode.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\version.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\voc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\vorbiscomment.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\vpcc.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\w64.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\wtv.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\wv.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\yuv4mpeg.h">
+      <Filter>avformat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\libavutil\rational.h">
+      <Filter>avutil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ffmpeg_source_analysis_3.3\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleApplication2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\allformats.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\asf.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\async.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\avio.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\aviobuf.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\cache.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\concat.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\crypto.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\cutils.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\data_uri.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\dump.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\file.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\file_open.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\flvdec.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\format.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\ftp.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\golomb_tab.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\gopher.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hls.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\hlsproto.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\http.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\httpauth.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\icecast.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v1.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\id3v2.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\isom.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\log2_tab.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\md5proto.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\metadata.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mms.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mmsh.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mmst.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mov_chan.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mpegts.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\mux.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\network.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\options.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\os_support.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\prompeg.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\protocols.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\qtpalette.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\replaygain.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riff.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\riffdec.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\sdp.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtp.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\srtpproto.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\subfile.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tcp.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\tee_common.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\teeproto.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\udp.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\url.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\urldecode.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ffmpeg_source_analysis_3.3\libavformat\utils.c">
+      <Filter>avformat</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
