@@ -91,4 +91,6 @@ private:
 	MUInt32		m_pes_header_size;
 	MByte		m_buffer[512000];
 	mv3File		m_fileWrite;
+
+	MBool		m_isFoundPmt;
 };
