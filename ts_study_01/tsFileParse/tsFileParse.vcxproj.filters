@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="tool">
+      <UniqueIdentifier>{ce690432-f4d6-4b8d-a6be-a5cc1ae2b5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{1eb2e286-4e0b-4a0e-b2be-641dfabe1eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ts">
+      <UniqueIdentifier>{116ae89b-b113-43b0-bf7c-8bb6bec9ed78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\mv3File.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="include\amcomdef.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\amtypes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+    <ClInclude Include="TsStream.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tsFileParse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\mv3File.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>ts</Filter>
+    </ClCompile>
+    <ClCompile Include="TsStream.cpp">
+      <Filter>ts</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
