@@ -16,9 +16,9 @@ private:
 	};
 
 
-	struct ts_header
+	struct ts_packet_header
 	{
-		ts_header()
+		ts_packet_header()
 		{
 			sync_byte = 0;
 			transport_error = MFalse;
@@ -73,9 +73,11 @@ public:
 	MUInt32 mpegts_read_header();
 
 private:
-	MBool	probe(MPByte p_buffer,MUInt32 p_size);
-	MUInt32 parse_ts(MByte* buffer_packet);
-	MVoid parse_ts_header(MByte* buffer, ts_header &tsHeader);
+	//½âÎöts
+	MBool	read_probe(MPByte p_buffer,MUInt32 p_size);
+	MInt32 read_header(MPByte p_buffer, MUInt32 p_size);
+	//MUInt32 parse_ts(MByte* buffer_packet);
+	MVoid parse_ts_packet_header(MByte* buffer, ts_packet_header &tsHeader);
 
 	MUInt32 pat_cb(MByte* section_start_pos);
 	MUInt32 pmt_cb(MByte* section_start_pos);

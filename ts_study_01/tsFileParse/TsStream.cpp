@@ -5,6 +5,10 @@
 
 #define PACKET_SIZE	188
 #define SECTION_HEADER_SIZE_8_BYTE		8
+#define PROBE_BUFFER_SIZE	PACKET_SIZE * 10
+
+#define TS_PACKET_SYNC_BYTE		0x47
+
 #define PAT_PID                 0x0000
 #define SDT_PID                 0x0011		//17
 #define PMT_PID					0x1000		//4096
@@ -60,10 +64,13 @@ MUInt32 TsStream::mpegts_read_header()
 	int i = 0;
 	int length = file.GetFileSize();
 	
-	while (file.Read(packet, PACKET_SIZE))
+	while (file.Read(packet, PROBE_BUFFER_SIZE))
 	{
 		//printf("i = %d ,curpos = %d\n",i++,file.GetFileCurPos());
-		ret = parse_ts(packet);
+
+		read_probe(packet, PROBE_BUFFER_SIZE);
+
+		//ret = parse_ts(packet);
 		//if (ret != 0)
 		//{
 		//	return ret;
@@ -78,58 +85,64 @@ MUInt32 TsStream::mpegts_read_header()
 	}
 }
 
-MBool TsStream::probe(MPByte p_buffer, MUInt32 p_size)
+MBool TsStream::read_probe(MPByte p_buffer, MUInt32 p_size)
 {
+	if (p_buffer != MNull || p_size < PROBE_BUFFER_SIZE)
+	{
+		return MFalse;
+	}
 	MUInt32 check_count = p_size / TS_PACKET_SIZE;
-	if (check_count <= 0)
+	MUInt32	standard_count = 10;
+	if (check_count < standard_count)
 	{
 		return MFalse;
 	}
 
-
+	MUInt32 best_score = 0;
+	MUInt32 pos = 0;
+	for (MUInt32 i = 1;i<=check_count;i++)
+	{
+		if (p_buffer[pos]== TS_PACKET_SYNC_BYTE)
+		{
+			best_score++;
+			pos = i * PACKET_SIZE;
+		}
+	}
+	if (check_count == standard_count)
+	{
+		return MTrue;
+	}
+	return MFalse;
 }
 
-MUInt32 TsStream::parse_ts(MByte* buffer_packet)
+
+
+MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 {
-	ts_header tsHeader;
-	parse_ts_header(buffer_packet, tsHeader);
+	if (p_buffer_packet == MNull || p_size != PACKET_SIZE)
+	{
+		return -1;
+	}
+	ts_packet_header tsHeader;
+	parse_ts_packet_header(p_buffer_packet, tsHeader);
 
-	if (tsHeader.sync_byte != 0x47)
+	if (tsHeader.sync_byte != TS_PACKET_SYNC_BYTE || tsHeader.transport_error)
 	{
 		return -1;
 	}
 
-	if (tsHeader.transport_error)
-	{
-		return -1;
-	}
-
-	if (tsHeader.pid == 0x1FFF || tsHeader.has_payload == false)
+	if (tsHeader.pid == 0x1FFF || tsHeader.has_payload == MFalse)
 	{
 		return 0;
 	}
 
-
-
-	//if (tsHeader.has_adaptation)
-	//{
-	//	//有自适应字段
-	//	//adaptation_field_length	1B	自适应域长度，后面的字节数，不包括adaptation_field_length，所以自适应长度应该为 adaptation_field_length + 1
-	//	//flag						1B	取0x50表示包含PCR或0x40表示不包含PCR
-	//	//PCR						5B	Program Clock Reference，节目时钟参考，用于恢复出与编码端一致的系统时序时钟STC（System Time Clock）。
-	//	//stuffing_bytes			xB	填充字节，取值0xff
-	//}
-	
-
 	MUInt16 adaptation_length = 0;
 	if (tsHeader.has_adaptation)
 	{
-		//当是pes时，adaptation当做填充字段
-		
-		adaptation_length = buffer_packet[4] + 1;
+		adaptation_length = p_buffer_packet[4] + 1;
 		if (adaptation_length > 1)
 		{
-			bool is_discontinuity = buffer_packet[5] & 0x80;
+			bool is_discontinuity = p_buffer_packet[5] & 0x80;
 			if (is_discontinuity)
 			{
 				int i = 0;
@@ -148,7 +161,7 @@ MUInt32 TsStream::parse_ts(MByte* buffer_packet)
 		//section	
  		if (tsHeader.bStart_payload)
 		{
-			MByte* point_field = buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length;
+			MByte* point_field = p_buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length;
 			point_field_length = point_field[0] + 1;	
 			//printf("bStart_payload ,point_field_length = %d\n", point_field_length);
 		}
@@ -156,7 +169,7 @@ MUInt32 TsStream::parse_ts(MByte* buffer_packet)
 	}
 
 
-	MByte* buffer_packet_section_strat_pos = buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length + point_field_length;
+	MByte* buffer_packet_section_strat_pos = p_buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length + point_field_length;
 	MUInt32	buffer_remain_size = PACKET_SIZE - adaptation_length - TS_PACKET_HEADER_SIZE - point_field_length;
 
 
@@ -301,7 +314,7 @@ MUInt32 TsStream::parse_frame(MByte* buffer,MUInt32 buffer_size,MBool is_start)
 
 
 
-MVoid TsStream::parse_ts_header(MByte* buffer, ts_header &tsHeader)
+MVoid TsStream::parse_ts_packet_header(MByte* buffer, ts_packet_header &tsHeader)
 {
 	tsHeader.sync_byte = buffer[0];
 
