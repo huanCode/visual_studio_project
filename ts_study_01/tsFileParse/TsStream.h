@@ -71,6 +71,9 @@ private:
 
 public:
 	MUInt32 mpegts_read_header();
+
+private:
+	MBool	probe(MPByte p_buffer,MUInt32 p_size);
 	MUInt32 parse_ts(MByte* buffer_packet);
 	MVoid parse_ts_header(MByte* buffer, ts_header &tsHeader);
 

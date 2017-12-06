@@ -23,6 +23,7 @@
 
 typedef MInt32					MLong;	//As the size of long is various depending on compilers, we'd better use fixed-size integer type instead
 typedef MUInt8					MByte;
+typedef MUInt8*					MPByte;
 typedef MUInt16					MWord;
 typedef MUInt32					MDWord;
 typedef MVoid*					MHandle;

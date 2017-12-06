@@ -24,6 +24,8 @@
 #define PES_START_SIZE  6
 #define PES_HEADER_SIZE 9
 
+#define TS_PACKET_SIZE 188
+
 #define AV_RB16(x)  ((((const MUInt8*)(x))[0] << 8) | ((const MUInt8*)(x))[1])
 //#define AV_RB32(x)  ((((const uint8_t*)(x))[0] << 24) | /
 //(((const uint8_t*)(x))[1] << 16) | /
@@ -74,6 +76,17 @@ MUInt32 TsStream::mpegts_read_header()
 
 		printf("\n");
 	}
+}
+
+MBool TsStream::probe(MPByte p_buffer, MUInt32 p_size)
+{
+	MUInt32 check_count = p_size / TS_PACKET_SIZE;
+	if (check_count <= 0)
+	{
+		return MFalse;
+	}
+
+
 }
 
 MUInt32 TsStream::parse_ts(MByte* buffer_packet)
@@ -375,18 +388,17 @@ MUInt32 TsStream::pmt_cb(MByte* section_start_pos)
 	{
 		return -1;
 	}
-	MByte* pData = section_start_pos + 8;
+	MByte* pData = section_start_pos + SECTION_HEADER_SIZE_8_BYTE;
 	if (section_header.tid != PMT_TID)
 		return 0;
 
 
-	m_pcr_pid = to_UInt16(pData);
-	pData += 2;
+	m_pcr_pid = get16(pData);
 	if (m_pcr_pid < 0)
 		return 0;
 	m_pcr_pid &= 0x1fff;
 
-	MUInt16 program_info_length = to_UInt16(pData);
+	MUInt16 program_info_length = get16(pData);
 	pData += 2;
 	if (program_info_length < 0)
 		return -1;
@@ -400,11 +412,8 @@ MUInt32 TsStream::pmt_cb(MByte* section_start_pos)
 		//27 0x1b H264
 		m_streamVideo.stream_type = *pData;
 		pData++;
-		m_streamVideo.pid = to_UInt16(pData) & 0x1fff;
-		pData += 2;
-		MUInt16  desc_list_len = to_UInt16(pData);
-		pData += 2;
-
+		m_streamVideo.pid = get16(pData) & 0x1fff;
+		MUInt16  desc_list_len = get16(pData);
 		if (desc_list_len < 0)
 			return -1;
 		desc_list_len &= 0xfff;
