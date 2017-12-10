@@ -85,7 +85,7 @@ MBool mv3File::Read(MByte* buffer, MInt32 bufferSize)
 		return MFalse;
 	}
 
-	MInt32 trueReadByteSize = fread(buffer, 1, bufferSize, m_pFile);
+	MInt32 trueReadByteSize = (MInt32)fread(buffer, 1, bufferSize, m_pFile);
 	if (trueReadByteSize > bufferSize || trueReadByteSize == 0)
 	{
 		//真实读取的字节数大于要求时，肯定是错的

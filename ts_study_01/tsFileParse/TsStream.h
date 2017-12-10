@@ -2,8 +2,9 @@
 #include "amcomdef.h"
 #include "mv3File.h"
 #include "TsStreamDef.h"
-
 #define FILTER_NUM	6
+
+using namespace std;
 class tsFilter;
 class TsStream
 {
@@ -12,8 +13,8 @@ public:
 private:
 	struct Packet
 	{
-		MInt32	pts;
-		MInt32  dts;
+		MInt64	pts;
+		MInt64  dts;
 		MByte*	buffer;
 		MUInt32	size;
 		MInt32	type;
@@ -59,11 +60,7 @@ private:
 		MUInt8 last_sec_num;
 	} SectionHeader;
 
-	struct StreamData
-	{
-		MUInt32	stream_type;
-		MUInt32 pid;
-	};
+
 
 	enum MpegTSState {
 		MPEGTS_HEADER = 0,
@@ -74,8 +71,12 @@ private:
 	};
 
 public:
+	MBool	Init();
 	MUInt32 mpegts_read_header();
 
+	tsFilter*	add_filter(MInt32 pid);
+	tsFilter*	get_filter(MInt32 pid);
+	MVoid	Release();
 private:
 	//½âÎöts
 	MBool	read_probe(MPByte p_buffer,MUInt32 p_size);
@@ -83,18 +84,17 @@ private:
 	//MUInt32 parse_ts(MByte* buffer_packet);
 	MVoid parse_ts_packet_header(MByte* buffer, ts_packet_header &tsHeader);
 
-	MUInt32 pat_cb(MByte* section_start_pos);
-	MUInt32 pmt_cb(MByte* section_start_pos);
+
 	//MInt32 TsStream::parse_section_header(MByte* biffer_section_header, SectionHeader &section_header);
 	MUInt32 parse_frame(MByte* buffer,MUInt32 buffer_size,MBool is_start);
 	inline MInt64 ff_parse_pes_pts(const MUInt8 *buffer);
 
-	tsFilter*	add_filter(MUInt32 pid);
-	MVoid write_section_data(MpegTSFilter *p_tsFilter,const MByte *p_buf, MUInt32 p_buf_size, MBool p_is_start)
+
+
+
 private:
 	MUInt32		m_pcr_pid;
-	StreamData	m_streamVideo;
-	StreamData	m_streamAudio;
+
 
 	MpegTSState	m_pes_state;
 	Packet		m_packet;
@@ -105,7 +105,9 @@ private:
 	mv3File		m_fileWrite;
 
 	MBool		m_isFoundPmt;
-	MpegTSFilter*	m_tsFilter[FILTER_NUM];
+
 
 	tsFilter*	m_filter[FILTER_NUM];
+
+
 };

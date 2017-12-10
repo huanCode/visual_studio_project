@@ -1,7 +1,8 @@
 #include "stdafx.h"
+#include "tsFilter.h"
 #include "TsStream.h"
 #include "common.h"
-#include "tsFilter.h"
+
 
 #define PACKET_SIZE	188
 #define SECTION_HEADER_SIZE_8_BYTE		8
@@ -24,7 +25,7 @@
 
 #define TS_PACKET_SIZE 188
 
-#define AV_RB16(x)  ((((const MUInt8*)(x))[0] << 8) | ((const MUInt8*)(x))[1])
+
 //#define AV_RB32(x)  ((((const uint8_t*)(x))[0] << 24) | /
 //(((const uint8_t*)(x))[1] << 16) | /
 //(((const uint8_t*)(x))[2] << 8) | /
@@ -44,7 +45,23 @@ TsStream::TsStream()
 	MBool ret = m_fileWrite.Open("bigbuckbunny_480x272.h265", mv3File::stream_write);
 	m_isFoundPmt = MFalse;
 
-	memset(m_tsFilter, 0, sizeof(MpegTSFilter) * 6);
+
+}
+
+MBool TsStream::Init()
+{
+	tsFilter* pat = add_filter(PAT_PID);
+	tsFilter* sdt = add_filter(PAT_PID);
+	if (pat == MNull || sdt == MNull)
+	{
+		goto Exit;
+	}
+	return MTrue;
+Exit:
+
+	Release();
+
+	return MFalse;
 }
 
 MUInt32 TsStream::mpegts_read_header()
@@ -78,6 +95,22 @@ MUInt32 TsStream::mpegts_read_header()
 		}
 
 		printf("\n");
+	}
+
+
+	return 0;
+}
+
+MVoid TsStream::Release()
+{
+	for (MInt32 i = 0;i < FILTER_NUM;i++)
+	{
+		if (m_filter[i] == MNull)
+		{
+			break;
+		}
+		delete m_filter[i];
+		m_filter[i] = MNull;
 	}
 }
 
@@ -121,7 +154,7 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	}
 	ts_packet_header tsHeader;
 	parse_ts_packet_header(p_buffer_packet, tsHeader);
-
+	MPByte	pData = p_buffer_packet + TS_PACKET_HEADER_SIZE;
 	if (tsHeader.sync_byte != TS_PACKET_SYNC_BYTE || tsHeader.transport_error)
 	{
 		return -1;
@@ -135,10 +168,10 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	MUInt16 adaptation_length = 0;
 	if (tsHeader.has_adaptation)
 	{
-		adaptation_length = p_buffer_packet[4] + 1;
+		adaptation_length = get8(pData) + 1;
 		if (adaptation_length > 1)
 		{
-			bool is_discontinuity = p_buffer_packet[5] & 0x80;
+			bool is_discontinuity = get8(pData) & 0x80;
 			if (is_discontinuity)
 			{
 				int i = 0;
@@ -150,103 +183,72 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	//printf("continuity_counter = %d\n", tsHeader.continuity_counter);
 
 
-	MByte* buffer_packet_section_strat_pos = p_buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length + point_field_length;
-	MUInt32	buffer_remain_size = PACKET_SIZE - adaptation_length - TS_PACKET_HEADER_SIZE - point_field_length;
 
-	tsFilter* filter = add_filter(tsHeader.pid);
+	pData += adaptation_length + 1;
+	MInt32 remainderSize = PACKET_SIZE - adaptation_length - 1 - TS_PACKET_HEADER_SIZE;
+
+	tsFilter* filter = get_filter(tsHeader.pid);
 	if (!filter)
 	{
 		return -1;
 	}
 
 
-	if (filter->type == MPEGTS_SECTION)
+	if (filter->GetType() == tsFilter::MPEGTS_SECTION)
 	{
 		if (tsHeader.bStart_payload)
 		{
 			/* pointer field present */
 			MByte* point_field = p_buffer_packet + TS_PACKET_HEADER_SIZE + adaptation_length;
 			MUInt16 point_field_length = point_field[0];
-			MUInt32 expected_cc = tsHeader.has_payload ? (filter->last_cc + 1) & 0x0f : filter->last_cc;
-			if (expected_cc == tsHeader.continuity_counter && point_field_length)
+			//MUInt32 expected_cc = tsHeader.has_payload ? (filter->last_cc + 1) & 0x0f : filter->last_cc;
+			//if (expected_cc == tsHeader.continuity_counter && point_field_length)
+			//{
+			//	filter->write_section_data(pData, remainderSize, MFalse);
+			//}
+			if (point_field_length)
 			{
-
+				return -1;
 			}
+			tsSection* filterTmp = (tsSection*)filter;
+			filterTmp->write_section_data(this,pData + 1, remainderSize, MFalse);
 		}
 		else
 		{
-
+			//
+			return -1;
 		}
 	}
+	else
+	{
+		filter->parse(this,pData, remainderSize);
+	}
 
 
-	if(tsHeader.pid == PAT_PID)
-	{
-		//printf("PAT \n");
-		pat_cb(buffer_packet_section_strat_pos);
-	}
-	else if (tsHeader.pid == PMT_PID && m_isFoundPmt)
-	{
-		//printf("PMT \n");
-		pmt_cb(buffer_packet_section_strat_pos);
-	}
-	else if (tsHeader.pid == m_streamVideo.pid)
-	{
-		//printf("PES Video \n");
-		parse_frame(buffer_packet_section_strat_pos, buffer_remain_size, tsHeader.bStart_payload);
-	}
-	else if (tsHeader.pid == m_streamAudio.pid)
-	{
-		//printf("PES Audio \n");
-		parse_frame(buffer_packet_section_strat_pos, buffer_remain_size, tsHeader.bStart_payload);
-	}
-	
-
+	//if(tsHeader.pid == PAT_PID)
+	//{
+	//	//printf("PAT \n");
+	//	pat_cb(buffer_packet_section_strat_pos);
+	//}
+	//else if (tsHeader.pid == PMT_PID && m_isFoundPmt)
+	//{
+	//	//printf("PMT \n");
+	//	pmt_cb(buffer_packet_section_strat_pos);
+	//}
+	//else if (tsHeader.pid == m_streamVideo.pid)
+	//{
+	//	//printf("PES Video \n");
+	//	parse_frame(buffer_packet_section_strat_pos, buffer_remain_size, tsHeader.bStart_payload);
+	//}
+	//else if (tsHeader.pid == m_streamAudio.pid)
+	//{
+	//	//printf("PES Audio \n");
+	//	parse_frame(buffer_packet_section_strat_pos, buffer_remain_size, tsHeader.bStart_payload);
+	//}
+	//
+	return 0;
 }
 
-
-
-MVoid TsStream::write_section_data(MpegTSFilter *p_tsFilter, const MByte *p_buf, MUInt32 p_buf_size, MBool p_is_start)
-{
-	MpegTSSectionFilter *tss = &p_tsFilter->section_or_pes.section_filter;
-
-
-	if (p_is_start) {
-		//说明section大小小于payload
-		memcpy(tss->section_buf, p_buf, p_buf_size);
-		tss->section_index = p_buf_size;
-		tss->section_length = -1;
-		tss->end_of_section_reached = 0;
-
-		/* compute section length if possible */
-		if (tss->section_length == -1 && tss->section_index >= 3) {
-			MUInt32 section_length = (AV_RB16(tss->section_buf + 1) & 0xfff) + 3;	//计算section_length
-			if (section_length > MAX_SECTION_SIZE)
-				return;
-			tss->section_length = section_length;
-		}
-	}
-	else {
-		if (tss->end_of_section_reached)
-			return;
-		MUInt32 remainder_len = MAX_SECTION_SIZE - tss->section_index;
-		if (p_buf_size < remainder_len)
-		{
-			memcpy(tss->section_buf + tss->section_index, p_buf, p_buf_size);
-			tss->section_index += p_buf_size;
-		}
-
-	}
-
-	if (tss->section_length != -1 && tss->section_index >= tss->section_length)
-	{
-		/*说明已经全部组合成*/
-		MBool crc_valid = MFalse;
-		tss->end_of_section_reached = 1;
-		/*省略crc验证*/
-	}
-
-}
 
 
 MUInt32 TsStream::parse_frame(MByte* buffer,MUInt32 buffer_size,MBool is_start)
@@ -395,142 +397,8 @@ MVoid TsStream::parse_ts_packet_header(MByte* buffer, ts_packet_header &tsHeader
 
 }
 
-//MUInt32 TsStream::pat_cb(MByte* section_start_pos)
-//{
-//	SectionHeader section_header;
-//	MByte* pat_data = section_start_pos;
-//	MInt32 ret = parse_section_header(pat_data, section_header);
-//	if (ret != 0)
-//	{
-//		return -1;
-//	}
-//	pat_data += SECTION_HEADER_SIZE_8_BYTE;
-//
-//	if (section_header.tid != PAT_TID)
-//		return 0;
-//
-//	MInt32 sid = 0;
-//	MInt32 pmt = 0;
-//
-//	//10字节,包括从transport_stream_id到last_section_number，和CRC32
-//	MUInt16 program_length = (section_header.section_length - 9) / 4;
-//	for(MUInt32 i = 0;i < program_length ;i++)
-//	{
-//		sid = get16(pat_data);
-//		if (sid < 0)
-//			break;
-//
-//		if (sid == 0)
-//		{
-//			//sid == 0,表示这是NIT，可以跳过
-//			continue;
-//		}
-//		//sid节目号为0x0001时, 表示这是PMT，PID = 0x1000，即4096
-//
-//		pmt = get16(pat_data);
-//		if (pmt < 0)
-//		{
-//			break;
-//		}
-//		pmt &= 0x1fff;
-//		if (pmt != PMT_PID)
-//		{
-//			return -1;
-//		}
-//		m_isFoundPmt = MTrue;
-//		//目前只支持一个pmt,so break
-//		break;
-//	}
-//}
-
-MUInt32 TsStream::pmt_cb(MByte* section_start_pos)
-{
 
 
-	//SectionHeader section_header;
-	//MInt32 ret = parse_section_header(section_start_pos, section_header);
-	//if (ret != 0)
-	//{
-	//	return -1;
-	//}
-	//MByte* pData = section_start_pos + SECTION_HEADER_SIZE_8_BYTE;
-	//if (section_header.tid != PMT_TID)
-	//	return 0;
-
-
-	//m_pcr_pid = get16(pData);
-	//if (m_pcr_pid < 0)
-	//	return 0;
-	//m_pcr_pid &= 0x1fff;
-
-	//MUInt16 program_info_length = get16(pData);
-	//pData += 2;
-	//if (program_info_length < 0)
-	//	return -1;
-	//program_info_length &= 0xfff;
-
-	////跳过program_info部分
-	//pData += program_info_length;
-	//
-	//while (true)
-	//{
-	//	//27 0x1b H264
-	//	m_streamVideo.stream_type = *pData;
-	//	pData++;
-	//	m_streamVideo.pid = get16(pData) & 0x1fff;
-	//	MUInt16  desc_list_len = get16(pData);
-	//	if (desc_list_len < 0)
-	//		return -1;
-	//	desc_list_len &= 0xfff;
-
-
-
-	//	//15 0xF为AAC
-	//	m_streamAudio.stream_type = section_start_pos[17];
-	//	m_streamAudio.pid = to_UInt16(section_start_pos + 18) & 0x1fff;
-	//	desc_list_len = to_UInt16(section_start_pos + 20);
-	//	if (desc_list_len < 0)
-	//		return -1;
-	//	desc_list_len &= 0xfff;
-	//}
-
-
-}
-
-
-//MInt32 TsStream::parse_section_header(MByte* buffer_section_header,SectionHeader &section_header)
-//{
-//	int val;
-//
-//	val = buffer_section_header[0];	//0 byte
-//	buffer_section_header++;
-//	if (val < 0)
-//		return -1;
-//
-//	section_header.tid = val;
-//
-//	section_header.section_length = get16(buffer_section_header) & 0xFFF;	
-//
-//	val = get16(buffer_section_header);	//3 byte
-//	if (val < 0)
-//		return val;
-//
-//	section_header.id = val;
-//
-//	val = *buffer_section_header;	//5 byte
-//	if (val < 0)
-//		return val;
-//	section_header.version = (val >> 1) & 0x1f;
-//	val = *buffer_section_header;	//6 byte
-//	if (val < 0)
-//		return val;
-//	section_header.sec_num = val;
-//	val = *buffer_section_header;	//7 byte
-//	if (val < 0)
-//		return val;
-//	section_header.last_sec_num = val;
-//	return 0;
-//}
 
 
 inline MInt64 TsStream::ff_parse_pes_pts(const MUInt8 *buf) {
@@ -539,16 +407,30 @@ inline MInt64 TsStream::ff_parse_pes_pts(const MUInt8 *buf) {
 		AV_RB16(buf + 3) >> 1;
 }
 
-tsFilter* TsStream::add_filter(MUInt32 pid)
+tsFilter* TsStream::add_filter(MInt32 pid)
 {
 	for (int i = 0;i<FILTER_NUM;i++)
 	{
 		if (m_filter[i] == MNull)
 		{
-			m_filter[i] = CreateFilter(pid);
+			m_filter[i] = FilterFactory::CreateFilter(pid);
 			return m_filter[i];
 		}
 	}
+
+	return MNull;
+}
+
+tsFilter*	TsStream::get_filter(MInt32 p_pid)
+{
+	for (int i = 0; i < FILTER_NUM; i++)
+	{
+		if (m_filter[i] && m_filter[i]->GetPid() == p_pid)
+		{
+			return m_filter[i];
+		}
+	}
+
 
 	return MNull;
 }
