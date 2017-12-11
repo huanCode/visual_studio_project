@@ -61,6 +61,7 @@ protected:
 class tsSection :public tsFilter
 {
 public:
+	tsSection();
 	MVoid write_section_data(TsStream* p_tsStream, const MByte *p_buf, MUInt32 p_buf_size, MBool p_is_start);
 protected:
 	MInt32 m_section_index;
@@ -129,11 +130,21 @@ public:
 	{
 		m_type = MPEGTS_PES;
 		m_description = "pes";
+		m_mediaType = AV_MediaType::AV_MEDIA_TYPE_UNKNOWN;
+		m_mediaCodecID = AV_CodecID::AV_CODEC_ID_NONE;
 	}
 	MUInt32 parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buffer_size);
 	MVoid	SetPid(MInt32 p_pid) {
 		m_pid = p_pid;
 	};
+
+	MVoid mpegts_find_stream_type(MInt32 stream_type, const StreamType *types);
+private:
+	
+private:
+	AV_MediaType	m_mediaType;
+	AV_CodecID		m_mediaCodecID;
+
 };
 
 

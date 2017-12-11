@@ -2,6 +2,7 @@
 #include "amcomdef.h"
 #include "mv3File.h"
 #include "TsStreamDef.h"
+//#include "tsFilter.h"
 #define FILTER_NUM	6
 
 using namespace std;
@@ -77,6 +78,7 @@ public:
 	tsFilter*	add_filter(MInt32 pid);
 	tsFilter*	get_filter(MInt32 pid);
 	MVoid	Release();
+	
 private:
 	//½âÎöts
 	MBool	read_probe(MPByte p_buffer,MUInt32 p_size);
@@ -104,10 +106,13 @@ private:
 	MByte		m_buffer[512000];
 	mv3File		m_fileWrite;
 
-	MBool		m_isFoundPmt;
-
-
+	MBool		m_isStart;
+	//friend class tsFilter;
+	friend class tsSectionPes;
 	tsFilter*	m_filter[FILTER_NUM];
+public:
+
+
 
 
 };

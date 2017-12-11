@@ -43,7 +43,7 @@ TsStream::TsStream()
 	memset(&m_packet,0,sizeof(Packet));
 	memset(&m_buffer, 0, 512000);
 	MBool ret = m_fileWrite.Open("bigbuckbunny_480x272.h265", mv3File::stream_write);
-	m_isFoundPmt = MFalse;
+	m_isStart = MFalse;
 
 
 }
@@ -77,11 +77,16 @@ MUInt32 TsStream::mpegts_read_header()
 	int i = 0;
 	int length = file.GetFileSize();
 	
-	while (file.Read(packet, PROBE_BUFFER_SIZE))
+	//if (file.Read(packet, PROBE_BUFFER_SIZE))
+	//{
+	//	read_probe(packet, PROBE_BUFFER_SIZE);
+	//}
+	//file.SetFileBeginPos();
+	while (file.Read(packet, 188))
 	{
 		//printf("i = %d ,curpos = %d\n",i++,file.GetFileCurPos());
 
-		read_probe(packet, PROBE_BUFFER_SIZE);
+		read_header(packet, 188);
 
 		//ret = parse_ts(packet);
 		//if (ret != 0)
@@ -116,7 +121,7 @@ MVoid TsStream::Release()
 
 MBool TsStream::read_probe(MPByte p_buffer, MUInt32 p_size)
 {
-	if (p_buffer != MNull || p_size < PROBE_BUFFER_SIZE)
+	if (p_buffer == MNull || p_size < PROBE_BUFFER_SIZE)
 	{
 		return MFalse;
 	}
@@ -190,7 +195,7 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	tsFilter* filter = get_filter(tsHeader.pid);
 	if (!filter)
 	{
-		return -1;
+		filter = add_filter(tsHeader.pid);
 	}
 
 
@@ -211,7 +216,7 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 				return -1;
 			}
 			tsSection* filterTmp = (tsSection*)filter;
-			filterTmp->write_section_data(this,pData + 1, remainderSize, MFalse);
+			filterTmp->write_section_data(this, point_field + 1, remainderSize, MTrue);
 		}
 		else
 		{
@@ -221,6 +226,7 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	}
 	else
 	{
+		m_isStart = tsHeader.bStart_payload;
 		filter->parse(this,pData, remainderSize);
 	}
 

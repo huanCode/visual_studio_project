@@ -1,5 +1,7 @@
+#ifndef _TSSTREAMDEF_H
+#define _TSSTREAMDEF_H
 #include "amcomdef.h"
-#define MAX_SECTION_SIZE	(4*1024)
+
 /*PSI*/
 #define PAT_PID                 0x0000
 #define SDT_PID                 0x0011		//17
@@ -10,6 +12,8 @@
 #define PAT_TID   0x00
 #define CAT_TID	  0x01
 #define PMT_TID   0x02
+
+#define MAX_SECTION_SIZE 4096
 
 #define AV_RB16(x)  ((((const MUInt8*)(x))[0] << 8) | ((const MUInt8*)(x))[1])
 #define AV_RL32(x)							\
@@ -55,33 +59,33 @@
 //	} section_or_pes;
 //};
 
-//enum AV_MediaType {
-//	AV_MEDIA_TYPE_UNKNOWN = -1,  ///< Usually treated as AVMEDIA_TYPE_DATA
-//	AV_MEDIA_TYPE_VIDEO,
-//	AV_MEDIA_TYPE_AUDIO,
-//	AV_MEDIA_TYPE_DATA,          ///< Opaque data information usually continuous
-//	AV_MEDIA_TYPE_SUBTITLE,
-//	AV_MEDIA_TYPE_ATTACHMENT,    ///< Opaque data information usually sparse
-//	AV_MEDIA_TYPE_NB
-//};
-//
-//enum AV_CodecID {
-//	AV_CODEC_ID_NONE,
-//	AV_CODEC_ID_AAC,
-//	AV_CODEC_ID_H264
-//};
-//
-//typedef struct StreamType {
-//	MUInt32 stream_type;
-//	enum AV_MediaType codec_type;
-//	enum AV_CodecID codec_id;
-//} StreamType;
-//
-//static const StreamType ISO_types[] = {
-//	{ 0x0f, AV_MEDIA_TYPE_AUDIO, AV_CODEC_ID_AAC },
-//	{ 0x1b, AV_MEDIA_TYPE_VIDEO, AV_CODEC_ID_H264 },
-//	{ 0 }
-//};
+enum AV_MediaType {
+	AV_MEDIA_TYPE_UNKNOWN = -1,  ///< Usually treated as AVMEDIA_TYPE_DATA
+	AV_MEDIA_TYPE_VIDEO,
+	AV_MEDIA_TYPE_AUDIO,
+	AV_MEDIA_TYPE_DATA,          ///< Opaque data information usually continuous
+	AV_MEDIA_TYPE_SUBTITLE,
+	AV_MEDIA_TYPE_ATTACHMENT,    ///< Opaque data information usually sparse
+	AV_MEDIA_TYPE_NB
+};
+
+enum AV_CodecID {
+	AV_CODEC_ID_NONE,
+	AV_CODEC_ID_AAC,
+	AV_CODEC_ID_H264
+};
+
+typedef struct StreamType {
+	MUInt32 stream_type;
+	enum AV_MediaType codec_type;
+	enum AV_CodecID codec_id;
+} StreamType;
+
+static const StreamType ISO_types[] = {
+	{ 0x0f, AV_MEDIA_TYPE_AUDIO, AV_CODEC_ID_AAC },
+	{ 0x1b, AV_MEDIA_TYPE_VIDEO, AV_CODEC_ID_H264 },
+	{ 0 }
+};
 
 
 
@@ -108,3 +112,4 @@
 //	{ 0 },
 //};
 
+#endif
