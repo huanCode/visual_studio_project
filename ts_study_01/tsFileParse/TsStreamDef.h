@@ -14,7 +14,8 @@
 #define PMT_TID   0x02
 
 #define MAX_SECTION_SIZE 4096
-
+#define MAX_PES_PAYLOAD 200 * 1024
+#define AV_INPUT_BUFFER_PADDING_SIZE 32
 #define AV_RB16(x)  ((((const MUInt8*)(x))[0] << 8) | ((const MUInt8*)(x))[1])
 #define AV_RL32(x)							\
 	((((const MByte*)(x))[3] << 24)|	\
@@ -88,6 +89,18 @@ static const StreamType ISO_types[] = {
 };
 
 
+enum MpegTSState {
+	MPEGTS_HEADER = 0,
+	MPEGTS_PESHEADER,
+	MPEGTS_PESHEADER_FILL,
+	MPEGTS_PAYLOAD,
+	MPEGTS_SKIP,
+};
+
+/* enough for PES header + length */
+#define PES_START_SIZE  6
+#define PES_HEADER_SIZE 9
+#define MAX_PES_HEADER_SIZE (9 + 255)
 
 //static const StreamType ISO_types[] = {
 //	{ 0x01, AVMEDIA_TYPE_VIDEO, AV_CODEC_ID_MPEG2VIDEO },

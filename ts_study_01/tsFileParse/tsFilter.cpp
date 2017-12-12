@@ -269,108 +269,163 @@ MUInt32 tsSectionPes::parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buf
 	//is_start = 0,表示这个时pes中的后续字节
 	MBool start = MFalse;
 	MBool b = p_tsStream->m_isStart;
-	//if (is_start)
-	//{
-	//	//表示上一帧读取完成
-	//	printf("PES  size = %d --------------------------------------\n", m_packet.size);
-	//	if (!m_fileWrite.Write(m_buffer, m_packet.size))
-	//	{
-	//		int i = 1;
-	//	}
+	if (p_tsStream->m_isStart)
+	{
+		//表示上一帧读取完成
+		//printf("PES  size = %d --------------------------------------\n", m_packet.size);
+		//if (!m_fileWrite.Write(m_buffer, m_packet.size))
+		//{
+		//	int i = 1;
+		//}
 
-	//	m_packet.size = 0;
-	//	m_pes_state = MPEGTS_HEADER;
-	//	start = MTrue;
+		//m_packet.size = 0;
+		//m_pes_state = MPEGTS_HEADER;
+		//start = MTrue;
 
-	//	memset(&m_buffer, 0, 512000);
-
-
-	//}
-
-	//MUInt16 length = 0;
-	//MUInt16 buffer_length = buffer_size;
-
-	//while (buffer_length > 0)
-	//{
-	//	if (m_pes_state == MPEGTS_HEADER)
-	//	{
-	//		if (PES_START_SIZE > buffer_size)
-	//		{
-	//			return -1;
-	//		}
-
-	//		if (buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0x01)
-	//		{
-	//			MUInt16 stream_id = buffer[3];
-	//			if (stream_id == 0xE0)
-	//			{
-	//				//video 0xe0
-	//				m_pes_state = MPEGTS_PESHEADER;
-	//			}
-	//			else if (stream_id == 0xC0)
-	//			{
-	//				//audio 0xc0
-	//				m_pes_state = MPEGTS_PESHEADER;
-	//			}
-
-	//			m_frame_total_size = to_UInt16(buffer + 4);
-
-	//		}
-	//		buffer_length = buffer_size - PES_START_SIZE;
-	//		m_pes_header_size = 6;
-
-	//	}
-	//	else if (m_pes_state == MPEGTS_PESHEADER)
-	//	{
-	//		if (PES_HEADER_SIZE > buffer_size)
-	//		{
-	//			return -1;
-	//		}
-
-	//		m_pes_header_size = buffer[8] + PES_HEADER_SIZE;
-	//		buffer_length = buffer_size - PES_HEADER_SIZE;
-	//		m_pes_state = MPEGTS_PESHEADER_FILL;
-	//	}
-	//	else if (m_pes_state == MPEGTS_PESHEADER_FILL)
-	//	{
-	//		MUInt16 flags = buffer[7];
-
-	//		if ((flags & 0xc0) == 0x80) {
-	//			m_packet.pts = m_packet.dts = ff_parse_pes_pts(buffer + 9);
-	//		}
-	//		else if ((flags & 0xc0) == 0xc0) {
-	//			m_packet.pts = ff_parse_pes_pts(buffer + 9);
-	//			m_packet.dts = ff_parse_pes_pts(buffer + 14);
-	//		}
-
-	//		buffer_length = buffer_size - m_pes_header_size;
-	//		m_pes_state = MPEGTS_PAYLOAD;
-	//	}
-	//	else if (m_pes_state == MPEGTS_PAYLOAD)
-	//	{
-	//		MUInt16	real_playload_size = (buffer_size - m_pes_header_size);
-
-	//		memcpy(m_buffer + m_packet.size, buffer + m_pes_header_size, real_playload_size);
-	//		m_packet.size += real_playload_size;
-	//		if (start)
-	//		{
-
-	//			MUInt8 by1 = buffer[m_pes_header_size];
-	//			MUInt8 by2 = buffer[m_pes_header_size + 1];
-	//			MUInt8 by3 = buffer[m_pes_header_size + 2];
-	//			MUInt8 by4 = buffer[m_pes_header_size + 3];
-	//			MUInt8 by5 = buffer[m_pes_header_size + 5];
-	//			printf("PES  nal %d 0x%d %x %d %d \n", by1, by2, by3, by4, by5);
-	//		}
-
-	//		m_pes_header_size = 0;
+		//memset(&m_buffer, 0, 512000);
 
 
-	//		break;
-	//	}
+	}
+
+	MUInt16 length = 0;
+	MInt32	code = 0;
+	MUInt16 buffer_length = buffer_size;
+	MPByte pBuffer = p_buffer;
+	while (p_buffer_size > 0)
+	{
+		if (m_state == MPEGTS_HEADER)
+		{
+			//if (PES_START_SIZE > buffer_size)
+			//{
+			//	return -1;
+			//}
+			length = PES_START_SIZE - m_size;
+			if (length > p_buffer_size)
+				length = p_buffer_size;
+
+			memcpy(m_header + m_size, pBuffer, length);
+			m_size += length;
+			p_buffer_size -= length;
+
+			if (m_size == PES_START_SIZE)
+			{
+				//-----------------------------------------------------------------------------
+				//| packet_start_code_prefix 3byte | stream_id 1byte | PES_packet_length 2byte
+				//-------------------------------------------------------------------------------
+				//packet_start_code_prefix : 0x00 00 01
+				//stream_id	:
+
+				/* we got all the PES or section header. We can now
+				* decide */
+				if (m_header[0] == 0x00 && m_header[1] == 0x00 && m_header[2] == 0x01)
+				{
+					/* it must be an MPEG-2 PES stream */
+					code = m_header[3] | 0x100;
+					m_stream_id = m_header[3];
+					if (code == 0x1be)
+					{
+						//goto skip
+					}
+					m_total_size = AV_RB16(m_header + 4);	//get pes size
+					if (m_total_size == 0)
+					{
+						//m_total_size  ,说明pes的大小是未知的
+						m_total_size = MAX_PES_PAYLOAD;
+					}
+					m_buffer = new MByte[m_total_size + AV_INPUT_BUFFER_PADDING_SIZE];
+					memset(m_buffer, 0, m_total_size + AV_INPUT_BUFFER_PADDING_SIZE);
+					if (!m_buffer)
+					{
+						return -1;
+					}
+
+					if (code != 0x1bc && code != 0x1bf && /* program_stream_map, private_stream_2 */
+						code != 0x1f0 && code != 0x1f1 && /* ECM, EMM */
+						code != 0x1ff && code != 0x1f2 && /* program_stream_directory, DSMCC_stream */
+						code != 0x1f8) {                  /* ITU-T Rec. H.222.1 type E stream */
+						m_state = MPEGTS_PESHEADER;
+	
+					}
+					else {
+						m_pes_header_size = 6;
+						m_state = MPEGTS_PAYLOAD;
+						m_size = 0;
+					}
+				}
+				else
+				{
+skip:
+					m_state = MPEGTS_SKIP;
+					continue;
+				}
+
+			}
+	
 
 
-	//}
+		}
+		else if (m_state == MPEGTS_PESHEADER)
+		{
+			length = PES_HEADER_SIZE - m_size;
+			if (length < 0)
+			{
+				return -1;
+			}
+
+			if (length > p_buffer_size)
+				length = p_buffer_size;
+
+			memcpy(m_header + m_size, pBuffer, length);
+			m_size += length;
+			pBuffer -= length;
+			p_buffer_size -= length;
+			if (m_size == PES_HEADER_SIZE) {
+				m_pes_header_size = m_header[8] + 9;
+				m_state = MPEGTS_PESHEADER_FILL;
+			}
+			break;
+
+		}
+		else if (m_pes_state == MPEGTS_PESHEADER_FILL)
+		{
+			MUInt16 flags = buffer[7];
+
+			if ((flags & 0xc0) == 0x80) {
+				m_packet.pts = m_packet.dts = ff_parse_pes_pts(buffer + 9);
+			}
+			else if ((flags & 0xc0) == 0xc0) {
+				m_packet.pts = ff_parse_pes_pts(buffer + 9);
+				m_packet.dts = ff_parse_pes_pts(buffer + 14);
+			}
+
+			buffer_length = buffer_size - m_pes_header_size;
+			m_pes_state = MPEGTS_PAYLOAD;
+		}
+		else if (m_pes_state == MPEGTS_PAYLOAD)
+		{
+			MUInt16	real_playload_size = (buffer_size - m_pes_header_size);
+
+			memcpy(m_buffer + m_packet.size, buffer + m_pes_header_size, real_playload_size);
+			m_packet.size += real_playload_size;
+			if (start)
+			{
+
+				MUInt8 by1 = buffer[m_pes_header_size];
+				MUInt8 by2 = buffer[m_pes_header_size + 1];
+				MUInt8 by3 = buffer[m_pes_header_size + 2];
+				MUInt8 by4 = buffer[m_pes_header_size + 3];
+				MUInt8 by5 = buffer[m_pes_header_size + 5];
+				printf("PES  nal %d 0x%d %x %d %d \n", by1, by2, by3, by4, by5);
+			}
+
+			m_pes_header_size = 0;
+
+
+			break;
+		}
+
+
+	}
 
 
 
