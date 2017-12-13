@@ -407,11 +407,7 @@ MVoid TsStream::parse_ts_packet_header(MByte* buffer, ts_packet_header &tsHeader
 
 
 
-inline MInt64 TsStream::ff_parse_pes_pts(const MUInt8 *buf) {
-	return (MInt64)(*buf & 0x0e) << 29 |
-		(AV_RB16(buf + 1) >> 1) << 15 |
-		AV_RB16(buf + 3) >> 1;
-}
+
 
 tsFilter* TsStream::add_filter(MInt32 pid)
 {

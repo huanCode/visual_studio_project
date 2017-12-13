@@ -289,25 +289,20 @@ MUInt32 tsSectionPes::parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buf
 
 	MUInt16 length = 0;
 	MInt32	code = 0;
-	MUInt16 buffer_length = buffer_size;
 	MPByte pBuffer = p_buffer;
 	while (p_buffer_size > 0)
 	{
 		if (m_state == MPEGTS_HEADER)
 		{
-			//if (PES_START_SIZE > buffer_size)
-			//{
-			//	return -1;
-			//}
-			length = PES_START_SIZE - m_size;
+			length = PES_START_SIZE - m_header_size;
 			if (length > p_buffer_size)
 				length = p_buffer_size;
 
-			memcpy(m_header + m_size, pBuffer, length);
-			m_size += length;
+			memcpy(m_header + m_header_size, pBuffer, length);
+			m_header_size += length;
 			p_buffer_size -= length;
 
-			if (m_size == PES_START_SIZE)
+			if (m_header_size == PES_START_SIZE)
 			{
 				//-----------------------------------------------------------------------------
 				//| packet_start_code_prefix 3byte | stream_id 1byte | PES_packet_length 2byte
@@ -332,6 +327,11 @@ MUInt32 tsSectionPes::parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buf
 						//m_total_size  ,说明pes的大小是未知的
 						m_total_size = MAX_PES_PAYLOAD;
 					}
+					else if(m_total_size > 0)
+					{
+						return -1;
+					}
+					
 					m_buffer = new MByte[m_total_size + AV_INPUT_BUFFER_PADDING_SIZE];
 					memset(m_buffer, 0, m_total_size + AV_INPUT_BUFFER_PADDING_SIZE);
 					if (!m_buffer)
@@ -349,7 +349,7 @@ MUInt32 tsSectionPes::parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buf
 					else {
 						m_pes_header_size = 6;
 						m_state = MPEGTS_PAYLOAD;
-						m_size = 0;
+						m_header_size = 0;
 					}
 				}
 				else
@@ -366,7 +366,7 @@ skip:
 		}
 		else if (m_state == MPEGTS_PESHEADER)
 		{
-			length = PES_HEADER_SIZE - m_size;
+			length = PES_HEADER_SIZE - m_header_size;
 			if (length < 0)
 			{
 				return -1;
@@ -375,52 +375,93 @@ skip:
 			if (length > p_buffer_size)
 				length = p_buffer_size;
 
-			memcpy(m_header + m_size, pBuffer, length);
-			m_size += length;
+			memcpy(m_header + m_header_size, pBuffer, length);
+			m_header_size += length;
 			pBuffer -= length;
 			p_buffer_size -= length;
-			if (m_size == PES_HEADER_SIZE) {
+			if (m_header_size == PES_HEADER_SIZE) {
 				m_pes_header_size = m_header[8] + 9;
 				m_state = MPEGTS_PESHEADER_FILL;
 			}
 			break;
 
 		}
-		else if (m_pes_state == MPEGTS_PESHEADER_FILL)
+		else if (m_state == MPEGTS_PESHEADER_FILL)
 		{
-			MUInt16 flags = buffer[7];
 
-			if ((flags & 0xc0) == 0x80) {
-				m_packet.pts = m_packet.dts = ff_parse_pes_pts(buffer + 9);
-			}
-			else if ((flags & 0xc0) == 0xc0) {
-				m_packet.pts = ff_parse_pes_pts(buffer + 9);
-				m_packet.dts = ff_parse_pes_pts(buffer + 14);
-			}
-
-			buffer_length = buffer_size - m_pes_header_size;
-			m_pes_state = MPEGTS_PAYLOAD;
-		}
-		else if (m_pes_state == MPEGTS_PAYLOAD)
-		{
-			MUInt16	real_playload_size = (buffer_size - m_pes_header_size);
-
-			memcpy(m_buffer + m_packet.size, buffer + m_pes_header_size, real_playload_size);
-			m_packet.size += real_playload_size;
-			if (start)
+			length = m_pes_header_size - m_header_size;
+			if (length < 0)
 			{
-
-				MUInt8 by1 = buffer[m_pes_header_size];
-				MUInt8 by2 = buffer[m_pes_header_size + 1];
-				MUInt8 by3 = buffer[m_pes_header_size + 2];
-				MUInt8 by4 = buffer[m_pes_header_size + 3];
-				MUInt8 by5 = buffer[m_pes_header_size + 5];
-				printf("PES  nal %d 0x%d %x %d %d \n", by1, by2, by3, by4, by5);
+				return -1;
 			}
 
-			m_pes_header_size = 0;
+			if (length > p_buffer_size)
+			{
+				length = p_buffer_size;
+			}
+			memcpy(m_header + m_header_size, pBuffer, length);
+			
+			m_header_size += length;
+			pBuffer += length;
+			p_buffer_size -= length;
+
+			if (m_header_size == m_pes_header_size)
+			{
+				
+				MUInt32 pts_dts_flags = m_header[7];
+				MUInt8* pes_head_data = m_header + m_header_size;
+				if ((pts_dts_flags & 0xc0) == 0x80) {
+					m_dts = m_pts = ff_parse_pes_pts(pes_head_data);
+					pes_head_data += 5;
+				}
+				else if ((pts_dts_flags & 0xc0) == 0xc0) {
+					m_pts = ff_parse_pes_pts(pes_head_data);
+					pes_head_data += 5;
+					m_dts = ff_parse_pes_pts(pes_head_data);
+					pes_head_data += 5;
+				}
+				if (pts_dts_flags & 0x01)
+				{
+					//扩展部分
+					return -1;
+				}
+				m_state = MPEGTS_PAYLOAD;
+				m_header_size = 0;
+				m_buffer_size = 0;
+				if (m_stream_type == 0x12 && p_buffer_size > 0) {
+					return -1;
+				}
+				if (m_stream_type == 0x15 && p_buffer_size >= 5) {
+					/* skip metadata access unit header */
+					return -1;
+				}
 
 
+			}
+
+		}
+		else if (m_state == MPEGTS_PAYLOAD)
+		{
+			if (m_buffer)
+			{
+				if (m_buffer_size > 0 && m_buffer_size + p_buffer_size > m_total_size)
+				{
+				}
+				else if (m_buffer_size == 0 && p_buffer_size > m_total_size)
+				{
+					p_buffer_size = m_total_size;
+				}
+
+				memcpy(m_buffer + m_buffer_size, pBuffer, p_buffer_size);
+				m_buffer_size += p_buffer_size;
+			}
+
+			p_buffer_size = 0;
+			break;
+		}
+		else if (m_state == MPEGTS_SKIP)
+		{
+			p_buffer_size = 0;
 			break;
 		}
 
@@ -435,7 +476,11 @@ skip:
 }
 
 
-
+inline MInt64 tsSectionPes::ff_parse_pes_pts(const MUInt8 *buf) {
+	return (MInt64)(*buf & 0x0e) << 29 |
+		(AV_RB16(buf + 1) >> 1) << 15 |
+		AV_RB16(buf + 3) >> 1;
+}
 
 MVoid tsSectionPes::mpegts_find_stream_type(MInt32 stream_type, const StreamType *types)
 {
@@ -444,6 +489,7 @@ MVoid tsSectionPes::mpegts_find_stream_type(MInt32 stream_type, const StreamType
 			if (m_mediaType != types->codec_type || m_mediaCodecID != types->codec_id) {
 				m_mediaType = types->codec_type;
 				m_mediaCodecID = types->codec_id;
+				m_stream_type = stream_type;
 			}
 			return;
 		}

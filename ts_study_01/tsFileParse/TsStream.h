@@ -89,7 +89,7 @@ private:
 
 	//MInt32 TsStream::parse_section_header(MByte* biffer_section_header, SectionHeader &section_header);
 	MUInt32 parse_frame(MByte* buffer,MUInt32 buffer_size,MBool is_start);
-	inline MInt64 ff_parse_pes_pts(const MUInt8 *buffer);
+	
 
 
 

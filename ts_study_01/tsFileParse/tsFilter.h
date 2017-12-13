@@ -133,11 +133,16 @@ public:
 		m_mediaType = AV_MediaType::AV_MEDIA_TYPE_UNKNOWN;
 		m_mediaCodecID = AV_CodecID::AV_CODEC_ID_NONE;
 		m_state = MpegTSState::MPEGTS_SKIP;
-		m_size = 0;
+		m_header_size = 0;
 		m_stream_id = 0;
 		m_total_size = 0;
 		m_buffer = MNull;
 		m_pes_header_size = 0;
+
+		m_pts = 0;
+		m_dts = 0;
+		m_stream_type = 0;
+		m_buffer_size = 0;
 	}
 	MUInt32 parse(TsStream* p_tsStream, MPByte p_buffer, MUInt32 p_buffer_size);
 	MVoid	SetPid(MInt32 p_pid) {
@@ -146,6 +151,7 @@ public:
 
 	MVoid mpegts_find_stream_type(MInt32 stream_type, const StreamType *types);
 private:
+	inline MInt64 ff_parse_pes_pts(const MUInt8 *buffer);
 	//typedef struct PESContext {
 	//	int pid;
 	//	int pcr_pid; /**< if -1 then all packets containing PCR are considered */
@@ -173,13 +179,18 @@ private:
 	AV_CodecID		m_mediaCodecID;
 	MpegTSState		m_state;
 
-	MInt32			m_size;
-	MInt8			m_header[MAX_PES_HEADER_SIZE];
+	MInt32			m_header_size;
+	MUInt8			m_header[MAX_PES_HEADER_SIZE];
 
 	MUInt32			m_stream_id;
 	MUInt32			m_total_size;
 	MPByte			m_buffer;
+	MInt32			m_buffer_size;
 	MInt32			m_pes_header_size;
+
+	MInt64			m_pts;
+	MInt64			m_dts;
+	MInt32			m_stream_type;
 };
 
 
