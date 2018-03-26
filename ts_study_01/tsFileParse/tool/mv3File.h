@@ -49,7 +49,7 @@ public:
 
 	virtual MBool Open(MPChar strFilePath, FileRight fileRight);
 	virtual MVoid Close();
-	virtual MBool Read(MByte* buffer,MInt32 bufferSize);
+	virtual MBool Read(MByte* buffer,MInt32 bufferSize,MInt32 &out_readByte);
 	virtual MBool Write(MByte* buffer, MInt32 bufferSize);
 	MInt32 GetFileSize();
 	//MBool  GetFileSize(MV3StringExt& strFileSize);

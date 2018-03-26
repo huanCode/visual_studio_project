@@ -78,8 +78,9 @@ MVoid mv3File::Close()
 	
 }
 
-MBool mv3File::Read(MByte* buffer, MInt32 bufferSize)
+MBool mv3File::Read(MByte* buffer, MInt32 bufferSize,MInt32 &out_readByte)
 {
+	out_readByte = 0;
 	if (m_pFile == MNull || buffer == MNull || bufferSize == 0)
 	{
 		return MFalse;
@@ -91,6 +92,7 @@ MBool mv3File::Read(MByte* buffer, MInt32 bufferSize)
 		//真实读取的字节数大于要求时，肯定是错的
 		return MFalse;
 	}
+	out_readByte = trueReadByteSize;
 	return MTrue;
 }
 

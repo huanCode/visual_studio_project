@@ -22,6 +22,9 @@
     <Filter Include="ts">
       <UniqueIdentifier>{116ae89b-b113-43b0-bf7c-8bb6bec9ed78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFrame">
+      <UniqueIdentifier>{2bbb8d97-7531-4a13-a0a1-9f4231aed877}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -32,9 +35,6 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="tool\mv3File.h">
-      <Filter>tool</Filter>
     </ClInclude>
     <ClInclude Include="include\amcomdef.h">
       <Filter>include</Filter>
@@ -48,6 +48,48 @@
     <ClInclude Include="TsStream.h">
       <Filter>ts</Filter>
     </ClInclude>
+    <ClInclude Include="ToolString.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="ParseHls.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+    <ClInclude Include="IParse.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\amstring.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolList.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ammem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="IBaseIo.h">
+      <Filter>SourceFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpIo.h">
+      <Filter>SourceFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="tsFilter.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+    <ClInclude Include="tsPat.h">
+      <Filter>ts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mhttp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\mv3File.h">
+      <Filter>SourceFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFrame.h">
+      <Filter>SourceFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBuffer.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -56,14 +98,35 @@
     <ClCompile Include="tsFileParse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="tool\mv3File.cpp">
-      <Filter>tool</Filter>
-    </ClCompile>
     <ClCompile Include="common.cpp">
       <Filter>ts</Filter>
     </ClCompile>
     <ClCompile Include="TsStream.cpp">
       <Filter>ts</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolString.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="ParseHls.cpp">
+      <Filter>ts</Filter>
+    </ClCompile>
+    <ClCompile Include="IBaseIo.cpp">
+      <Filter>SourceFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpIo.cpp">
+      <Filter>SourceFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="tsFilter.cpp">
+      <Filter>ts</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\mv3File.cpp">
+      <Filter>SourceFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFrame.cpp">
+      <Filter>SourceFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBuffer.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

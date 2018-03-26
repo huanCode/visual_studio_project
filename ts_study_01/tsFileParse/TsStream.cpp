@@ -2,7 +2,7 @@
 #include "tsFilter.h"
 #include "TsStream.h"
 #include "common.h"
-
+#include "mhttp.h"
 
 #define PACKET_SIZE	188
 #define SECTION_HEADER_SIZE_8_BYTE		8
@@ -50,6 +50,8 @@ TsStream::TsStream()
 
 MBool TsStream::Init()
 {
+
+	MHandle m_hHttp = Http_Open("hhh", HTTP_POST, 0);
 	tsFilter* pat = add_filter(PAT_PID);
 	tsFilter* sdt = add_filter(PAT_PID);
 	if (pat == MNull || sdt == MNull)
@@ -82,7 +84,8 @@ MUInt32 TsStream::mpegts_read_header()
 	//	read_probe(packet, PROBE_BUFFER_SIZE);
 	//}
 	//file.SetFileBeginPos();
-	while (file.Read(packet, 188))
+	MInt32 iReadByteLen = 0;
+	while (file.Read(packet, 188, iReadByteLen))
 	{
 		//printf("i = %d ,curpos = %d\n",i++,file.GetFileCurPos());
 
@@ -144,7 +147,7 @@ MBool TsStream::read_probe(MPByte p_buffer, MUInt32 p_size)
 	}
 	if (check_count == standard_count)
 	{
-		return MTrue;
+		return Init();
 	}
 	return MFalse;
 }
@@ -253,123 +256,6 @@ MInt32 TsStream::read_header(MPByte p_buffer_packet, MUInt32 p_size)
 	//}
 	//
 	return 0;
-}
-
-
-
-MUInt32 TsStream::parse_frame(MByte* buffer,MUInt32 buffer_size,MBool is_start)
-{
-	//is_start = 1，表示这个时pes的开始
-	//is_start = 0,表示这个时pes中的后续字节
-	MBool start = MFalse;
-	if (is_start)
-	{
-		//表示上一帧读取完成
-		printf("PES  size = %d --------------------------------------\n", m_packet.size);
-		if (!m_fileWrite.Write(m_buffer, m_packet.size))
-		{
-			int i = 1;
-		}
-
-		m_packet.size = 0;
-		m_pes_state = MPEGTS_HEADER;
-		start = MTrue;
-		
-		memset(&m_buffer, 0, 512000);
-
-		
-	}
-
-	MUInt16 length = 0;
-	MUInt16 buffer_length = buffer_size;
-	
-	while (buffer_length > 0)
-	{
-		if (m_pes_state == MPEGTS_HEADER)
-		{
-			if (PES_START_SIZE > buffer_size)
-			{
-				return -1;
-			}
-
-			if (buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0x01)
-			{
-				MUInt16 stream_id = buffer[3];
-				if (stream_id == 0xE0)
-				{
-					//video 0xe0
-					m_pes_state = MPEGTS_PESHEADER;
-				}
-				else if (stream_id == 0xC0)
-				{
-					//audio 0xc0
-					m_pes_state = MPEGTS_PESHEADER;
-				}
-
-				m_frame_total_size = to_UInt16(buffer + 4);
-
-			}
-			buffer_length = buffer_size - PES_START_SIZE;
-			m_pes_header_size = 6;
-		
-		}
-		else if (m_pes_state == MPEGTS_PESHEADER)
-		{
-			if (PES_HEADER_SIZE > buffer_size)
-			{
-				return -1;
-			}
-
-			m_pes_header_size = buffer[8] + PES_HEADER_SIZE;
-			buffer_length = buffer_size - PES_HEADER_SIZE;
-			m_pes_state = MPEGTS_PESHEADER_FILL;
-		}
-		else if (m_pes_state == MPEGTS_PESHEADER_FILL)
-		{
-			MUInt16 flags = buffer[7];
-
-			if ((flags & 0xc0) == 0x80) {
-				m_packet.pts = m_packet.dts = ff_parse_pes_pts(buffer+9);
-			}
-			else if ((flags & 0xc0) == 0xc0) {
-				m_packet.pts = ff_parse_pes_pts(buffer + 9);
-				m_packet.dts = ff_parse_pes_pts(buffer + 14);
-			}
-
-			buffer_length = buffer_size - m_pes_header_size;
-			m_pes_state = MPEGTS_PAYLOAD;
-		}
-		else if (m_pes_state == MPEGTS_PAYLOAD)
-		{
-			MUInt16	real_playload_size = (buffer_size - m_pes_header_size);
-			
-			memcpy(m_buffer+ m_packet.size, buffer + m_pes_header_size, real_playload_size);
-			m_packet.size += real_playload_size;
-			if (start)
-			{
-				
-				MUInt8 by1 = buffer[m_pes_header_size];
-				MUInt8 by2 = buffer[m_pes_header_size + 1];
-				MUInt8 by3 = buffer[m_pes_header_size + 2];
-				MUInt8 by4 = buffer[m_pes_header_size + 3];
-				MUInt8 by5 = buffer[m_pes_header_size + 5];
-				printf("PES  nal %d 0x%d %x %d %d \n", by1, by2, by3, by4, by5);
-			}
-	
-			m_pes_header_size = 0;
-
-			
-			break;
-		}
-
-
-	}
-
-
-
-
-
-	return 1;
 }
 
 
