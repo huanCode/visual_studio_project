@@ -3,7 +3,7 @@
 #include "amstring.h"
 #include "ToolString.h"
 #include "ParseHls.h"
-
+#include "common.h"
 #include <string.h>
 #define URL_SCHEME_CHARS                        \
     "abcdefghijklmnopqrstuvwxyz"                \
@@ -49,7 +49,20 @@ MBool SourceFrame::Open(MPChar strUrl)
 		return MFalse;
 	}
 
-	return m_baseIo->Open(strUrl);
+	if (m_baseIo->Open(strUrl))
+	{
+		MInt32 readSize = m_baseIo->IoRead(m_buffer.GetBuffer(), 256);
+		if (readSize == -1)
+		{
+			return MFalse;
+		}
+		m_buffer.WriteSize(readSize);
+
+
+		
+
+	}
+	 
 }
 
 
@@ -118,6 +131,11 @@ IBaseIoType SourceFrame::parseUrl(MPChar strUrl)
 
 }
 
+
+MBool SourceFrame::findParse(MPChar buffer, MInt32 bufSize)
+{
+
+}
 
 MBool SourceFrame::createBaseIo(MPChar strUrl)
 {

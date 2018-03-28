@@ -1,6 +1,7 @@
+#include "stdafx.h"
 #include "ToolBuffer.h"
 #include "ammem.h"
-
+#include "common.h"
 
 ToolBuffer::ToolBuffer(MInt32 iBufferSize /*= BUFFER_SIZE*/)
 {
@@ -65,6 +66,13 @@ MInt32 ToolBuffer::GetReadSize()
 	}
 
 	return 0;
+}
+
+MVoid ToolBuffer::WriteSize(MInt32 size)
+{
+	MInt32 canWriteSize = m_bufferEnd - m_curPos;
+	canWriteSize = Min(canWriteSize, size);
+	m_curPos += canWriteSize; 
 }
 
 MVoid ToolBuffer::SetBufferSize(MInt32 iBufferSize)

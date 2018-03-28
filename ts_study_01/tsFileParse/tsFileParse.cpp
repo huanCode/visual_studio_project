@@ -6,6 +6,7 @@
 #include "TsStream.h"
 #include "ParseHls.h"
 #include "ToolList.h"
+#include "ToolString.h"
 inline MUInt16 to_UInt16(MByte* p)
 {
 	MUInt16 n = ((MByte*)p)[0];
@@ -31,8 +32,11 @@ int main()
 	//ll.AddNode(i3);
 	//int* ii = ll.GetNodePtrByIndex(4);
 
-	TsStream ts;
-	ts.mpegts_read_header();
+	MPChar tmp = "shende/r/ndfe";
+	MChar line[100] = {0};
+	ToolString::Read_line(tmp, sizeof(tmp), line, 100);
+	//TsStream ts;
+	//ts.mpegts_read_header();
 
 
 	//ParseHls ps;

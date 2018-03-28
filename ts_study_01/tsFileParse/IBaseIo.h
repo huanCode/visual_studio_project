@@ -11,7 +11,7 @@ public:
 	}
 
 	virtual MBool Open(MPChar strUrl) = 0;
-	virtual MInt32 IoRead(MByte* pBuf, MDWord dwSize, MInt64 llOffset = 0) = 0;
+	virtual MInt32 IoRead(MPChar pBuf, MDWord dwSize, MInt64 llOffset = 0) = 0;
 	virtual MVoid	IoClose() = 0;
 private:
 	MPChar	m_strType;

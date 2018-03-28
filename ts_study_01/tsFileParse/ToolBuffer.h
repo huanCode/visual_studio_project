@@ -13,6 +13,8 @@ public:
 	MVoid Close();
 	MInt32 GetWriteSize();
 	MInt32 GetReadSize();
+	MVoid WriteSize(MInt32 size);
+
 private:
 	MVoid   SetBufferSize(MInt32 iBufferSize);
 private:

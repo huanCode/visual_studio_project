@@ -22,11 +22,11 @@ MBool HttpIo::Open(MPChar strUrl)
 	return MFalse;
 }
 
-MInt32 HttpIo::IoRead(MByte* pBuf, MDWord dwSize, MInt64 llOffset = 0)
+MInt32 HttpIo::IoRead(MPChar pBuf, MDWord dwSize, MInt64 llOffset)
 {
 	MInt32 lReadSize = 0;
 
-	lReadSize = Http_Read(m_hHttp, pBuf, dwSize);
+	lReadSize = Http_Read(m_hHttp, (MByte*)pBuf, dwSize);
 	return lReadSize;
 }
 

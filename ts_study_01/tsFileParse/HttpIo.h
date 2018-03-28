@@ -9,7 +9,7 @@ public:
 	HttpIo();
 
 	MBool Open(MPChar strUrl);
-	MInt32 IoRead(MByte* pBuf, MDWord dwSize, MInt64 llOffset = 0);
+	MInt32 IoRead(MPChar pBuf, MDWord dwSize, MInt64 llOffset = 0);
 	MVoid IoClose();
 private:
 	

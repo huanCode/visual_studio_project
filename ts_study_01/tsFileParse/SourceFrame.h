@@ -29,6 +29,7 @@ public:
 private:
 	MBool createBaseIo(MPChar strUrl);
 	IBaseIoType parseUrl(MPChar strUrl);
+	MBool findParse(MPChar buffer,MInt32 bufSize);
 private:
 	IBaseIoType		m_baseIoType;
 	IBaseIo*		m_baseIo;
