@@ -18,8 +18,10 @@ class IBaseIo;
 class SourceFrame
 {
 public:
-	SourceFrame();
 
+	typedef MBool(*read_probe)(MPChar p_buffer, MUInt32 p_size);
+	SourceFrame();
+	
 	MBool Open(MPChar strUrl);
 	MInt32 IoRead(MByte* pBuf, MDWord dwSize);
 	MInt32 IoReadLine(MChar** ppBuffer);
@@ -33,6 +35,8 @@ private:
 	ToolList<IBaseIo*>	m_baseIoList;
 	ToolBuffer		m_buffer;
 	MBool			m_isFinish;
+
+	ToolList<read_probe>	m_probe;
 };
 
 

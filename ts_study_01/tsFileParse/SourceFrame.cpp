@@ -2,6 +2,8 @@
 #include "HttpIo.h"
 #include "amstring.h"
 #include "ToolString.h"
+#include "ParseHls.h"
+
 #include <string.h>
 #define URL_SCHEME_CHARS                        \
     "abcdefghijklmnopqrstuvwxyz"                \
@@ -23,6 +25,10 @@ SourceFrame::SourceFrame()
 {
 	m_baseIoType = none;
 	m_isFinish = MFalse;
+
+	m_probe.AddNode(ParseHls::hls_probe);
+
+
 }
 
 
@@ -67,10 +73,7 @@ MInt32 SourceFrame::IoReadLine(MChar** ppBuffer)
 		return 0;
 	}
 
-	if (m_buffer.)
-	{
 
-	}
 }
 
 IBaseIoType SourceFrame::parseUrl(MPChar strUrl)

@@ -48,7 +48,7 @@ private:
 
 public:
 	ParseHls();
-
+	static MBool hls_probe(MPChar p_buffer, MUInt32 p_size);
 	MBool Parse();
 	MBool ParseM3u8(MPChar strUrl,Playlist* playlist = MNull);
 
