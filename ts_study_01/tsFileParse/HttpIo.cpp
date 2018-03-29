@@ -13,7 +13,8 @@ MBool HttpIo::Open(MPChar strUrl)
 	MHandle m_hHttp = Http_Open(strUrl, HTTP_POST, 0);
 	if (m_hHttp)
 	{
-		if (Http_Connect(m_hHttp) == 0)
+		MInt32 ret = Http_Connect(m_hHttp);
+		if (ret == 0)
 		{
 			return MTrue;
 		}
@@ -34,7 +35,7 @@ MVoid HttpIo::IoClose()
 {
 	if (m_hHttp)
 	{
-		Http_Close(m_hHttp);
+		//Http_Close(m_hHttp);
 		m_hHttp = MNull;
 	}
 }

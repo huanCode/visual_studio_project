@@ -19,17 +19,20 @@ class SourceFrame
 {
 public:
 
-	typedef MBool(*read_probe)(MPChar p_buffer, MUInt32 p_size);
+
 	SourceFrame();
 	
 	MBool Open(MPChar strUrl);
-	MInt32 IoRead(MByte* pBuf, MDWord dwSize);
+	MBool IoRead(MChar**, MDWord dwSize,MInt32& out_readSize);
 	MInt32 IoReadLine(MChar** ppBuffer);
 	MBool isFinish(){return m_isFinish;};
 private:
 	MBool createBaseIo(MPChar strUrl);
 	IBaseIoType parseUrl(MPChar strUrl);
 	MBool findParse(MPChar buffer,MInt32 bufSize);
+
+	//IoBase读取的数据填满buffer
+	MBool fillBuffer();
 private:
 	IBaseIoType		m_baseIoType;
 	IBaseIo*		m_baseIo;
@@ -37,7 +40,7 @@ private:
 	ToolBuffer		m_buffer;
 	MBool			m_isFinish;
 
-	ToolList<read_probe>	m_probe;
+
 };
 
 

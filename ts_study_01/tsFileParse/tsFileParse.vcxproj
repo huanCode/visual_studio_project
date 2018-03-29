@@ -95,7 +95,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WS2_32.Lib;mpbase.lib;mpkernel.lib;http_io.lib;mpsocketd.lib;mpnet.lib;mputility.lib;mpl_utility.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WS2_32.Lib;mpbase.lib;mpkernel.lib;mpsocketd.lib;mpnet.lib;mputility.lib;mphttpd.lib;http_io.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,8 +160,10 @@
     <ClInclude Include="include\amtypes.h" />
     <ClInclude Include="include\mhttp.h" />
     <ClInclude Include="IParse.h" />
+    <ClInclude Include="ParseFrame.h" />
     <ClInclude Include="ParseHls.h" />
     <ClInclude Include="SourceFrame.h" />
+    <ClInclude Include="SourceParse.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ToolBuffer.h" />
@@ -176,8 +178,10 @@
     <ClCompile Include="common.cpp" />
     <ClCompile Include="HttpIo.cpp" />
     <ClCompile Include="IBaseIo.cpp" />
+    <ClCompile Include="ParseFrame.cpp" />
     <ClCompile Include="ParseHls.cpp" />
     <ClCompile Include="SourceFrame.cpp" />
+    <ClCompile Include="SourceParse.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

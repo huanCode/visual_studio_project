@@ -2,7 +2,6 @@
 #include "tsFilter.h"
 #include "TsStream.h"
 #include "common.h"
-#include "mhttp.h"
 
 #define PACKET_SIZE	188
 #define SECTION_HEADER_SIZE_8_BYTE		8
@@ -51,7 +50,7 @@ TsStream::TsStream()
 MBool TsStream::Init()
 {
 
-	MHandle m_hHttp = Http_Open("hhh", HTTP_POST, 0);
+	//MHandle m_hHttp = Http_Open("hhh", HTTP_POST, 0);
 	tsFilter* pat = add_filter(PAT_PID);
 	tsFilter* sdt = add_filter(PAT_PID);
 	if (pat == MNull || sdt == MNull)

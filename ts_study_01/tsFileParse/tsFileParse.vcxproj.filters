@@ -25,6 +25,9 @@
     <Filter Include="SourceFrame">
       <UniqueIdentifier>{2bbb8d97-7531-4a13-a0a1-9f4231aed877}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ParseFrame">
+      <UniqueIdentifier>{442b2fad-c668-44db-8bc2-b9a116a07dcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -90,6 +93,12 @@
     <ClInclude Include="ToolBuffer.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="SourceParse.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ParseFrame.h">
+      <Filter>ParseFrame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -127,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="ToolBuffer.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceParse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ParseFrame.cpp">
+      <Filter>ParseFrame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

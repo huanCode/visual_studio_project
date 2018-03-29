@@ -1,10 +1,12 @@
+#include "stdafx.h"
 #include "SourceFrame.h"
 #include "HttpIo.h"
 #include "amstring.h"
 #include "ToolString.h"
-#include "ParseHls.h"
+
 #include "common.h"
 #include <string.h>
+#include <windows.h>
 #define URL_SCHEME_CHARS                        \
     "abcdefghijklmnopqrstuvwxyz"                \
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"                \
@@ -26,7 +28,7 @@ SourceFrame::SourceFrame()
 	m_baseIoType = none;
 	m_isFinish = MFalse;
 
-	m_probe.AddNode(ParseHls::hls_probe);
+
 
 
 }
@@ -49,33 +51,53 @@ MBool SourceFrame::Open(MPChar strUrl)
 		return MFalse;
 	}
 
-	if (m_baseIo->Open(strUrl))
-	{
-		MInt32 readSize = m_baseIo->IoRead(m_buffer.GetBuffer(), 256);
-		if (readSize == -1)
-		{
-			return MFalse;
-		}
-		m_buffer.WriteSize(readSize);
-
-
-		
-
-	}
+	return m_baseIo->Open(strUrl);
 	 
 }
 
 
 
-MInt32 SourceFrame::IoRead(MByte* pBuf, MDWord dwSize)
+MBool SourceFrame::IoRead(MChar** pBuf, MDWord dwSize, MInt32& out_readSize)
 {
 	if (pBuf == MNull || dwSize <=0)
 	{
 		return 0;
 	}
 
-	MInt32 readByteSize = 0;
-	return 0;
+	MPChar buffer = *pBuf;
+	MInt32 readSize = 0;
+	while (dwSize)
+	{
+		readSize = m_baseIo->IoRead(buffer,dwSize);
+		if (readSize == dwSize)
+		{
+			return MTrue;
+		}
+		else if (readSize < dwSize && readSize > 0)
+		{
+			out_readSize += readSize;
+			dwSize -= readSize;
+		}
+		else if (readSize == -1)
+		{
+			//表明没有数据了,
+			return out_readSize?MTrue:MFalse;
+		}
+		else if (readSize == 0)
+		{
+			Sleep(10);
+		}
+		
+	}
+	if (dwSize < 0)
+	{
+		return MFalse;
+	}
+
+
+
+
+	return MTrue;
 }
 
 
@@ -104,24 +126,24 @@ IBaseIoType SourceFrame::parseUrl(MPChar strUrl)
 		ToolString::av_strlcpy(proto_str, strUrl,
 			FFMIN(proto_len + 1, sizeof(proto_str)));
 
-	if ((ptr = strchr(proto_str, ',')))
-		*ptr = '\0';
-	ToolString::av_strlcpy(proto_nested, proto_str, sizeof(proto_nested));
-	if ((ptr = strchr(proto_nested, '+')))
-		*ptr = '\0';
+	//if ((ptr = strchr(proto_str, ',')))
+	//	*ptr = '\0';
+	//ToolString::av_strlcpy(proto_nested, proto_str, sizeof(proto_nested));
+	//if ((ptr = strchr(proto_nested, '+')))
+	//	*ptr = '\0';
 
 	IBaseIoType type = IBaseIoType::none;
-	if (ptr)
+	if (proto_str)
 	{
-		if (!MStrCmp(ptr, "http"))
+		if (!MStrCmp(proto_str, "http"))
 		{
 			type = IBaseIoType::Http;
 		}
-		else if (!MStrCmp(ptr, "file"))
+		else if (!MStrCmp(proto_str, "file"))
 		{
 			type = IBaseIoType::File;
 		}
-		else if (!MStrCmp(ptr, "rtmp"))
+		else if (!MStrCmp(proto_str, "rtmp"))
 		{
 			type = IBaseIoType::Rtmp;
 		}
@@ -134,12 +156,22 @@ IBaseIoType SourceFrame::parseUrl(MPChar strUrl)
 
 MBool SourceFrame::findParse(MPChar buffer, MInt32 bufSize)
 {
+	return MFalse;
+}
 
+MBool SourceFrame::fillBuffer()
+{
+	while (m_buffer.GetWriteSize())
+	{
+
+	}
+
+	return MFalse;
 }
 
 MBool SourceFrame::createBaseIo(MPChar strUrl)
 {
-	IBaseIoType type = IBaseIoType::none;
+	IBaseIoType type = parseUrl(strUrl);
 
 	if (type == IBaseIoType::Http)
 	{

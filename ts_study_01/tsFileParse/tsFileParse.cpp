@@ -7,6 +7,7 @@
 #include "ParseHls.h"
 #include "ToolList.h"
 #include "ToolString.h"
+#include "SourceParse.h"
 inline MUInt16 to_UInt16(MByte* p)
 {
 	MUInt16 n = ((MByte*)p)[0];
@@ -31,6 +32,9 @@ int main()
 	//ll.AddNode(i2);
 	//ll.AddNode(i3);
 	//int* ii = ll.GetNodePtrByIndex(4);
+
+	SourceParse sourse;
+	sourse.Open("http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8");	//Ç¶Ì×
 
 	MPChar tmp = "shende/r/ndfe";
 	MChar line[100] = {0};
