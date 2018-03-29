@@ -10,7 +10,7 @@ HttpIo::HttpIo():
 
 MBool HttpIo::Open(MPChar strUrl)
 {
-	MHandle m_hHttp = Http_Open(strUrl, HTTP_POST, 0);
+	m_hHttp = Http_Open(strUrl, HTTP_GET, 0);
 	if (m_hHttp)
 	{
 		MInt32 ret = Http_Connect(m_hHttp);
@@ -18,6 +18,12 @@ MBool HttpIo::Open(MPChar strUrl)
 		{
 			return MTrue;
 		}
+
+		if (ret == MERR_SOCKET_TIMEDOUT)
+		{
+			return MFalse;
+		}
+
 	}
 
 	return MFalse;

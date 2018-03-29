@@ -50,7 +50,7 @@ void ParseHls::ff_parse_key_val_cb(void* srcData, MPChar key, MInt32 keyLen, MPC
 
 MBool ParseHls::hls_probe(MPChar p_buffer, MUInt32 p_size)
 {
-	if (MStrNCmp(p_buffer, "#EXTM3U", 7))
+	if (MStrNCmp(p_buffer, "#EXTM3U", 7) == 0)
 		return MTrue;
 
 	return MFalse;

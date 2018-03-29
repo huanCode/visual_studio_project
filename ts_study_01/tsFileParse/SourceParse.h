@@ -9,6 +9,7 @@ class SourceParse
 public:
 	SourceParse();
 	MBool Open(MPChar strUrl);
+	MBool ReadFrame();
 
 
 private:

@@ -17,7 +17,7 @@ MBool ParseFrame::FindParse(MPChar pbuf, MInt32 iBufSize)
 	//	probeFuntion(pbuf, iBufSize);
 	//}
 
-	ParseHls::hls_probe(pbuf, iBufSize);
+	return ParseHls::hls_probe(pbuf, iBufSize);
 
-	return MFalse;
+
 }
