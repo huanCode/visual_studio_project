@@ -23,12 +23,18 @@ int main()
 						   //in_filename  = "cuc_ieschool1.flv";//输入文件名（Input file URL）
 							//in_filename = "http://fnmm6ksw.vod1.hongshiyun.net/archive/hls/20160828/demo.m3u8";	//嵌套hls
 						   //in_filename = "https://dco4urblvsasc.cloudfront.net/811/81095_ywfZjAuP/game/index.m3u8";	//嵌套hls
-						   //in_filename = "http://hlsglsb.wasu.tv/1480682957527_561859.m3u8?action=hls&Contentid=CP23010020161201084109";
-						   in_filename = "http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8";
+						   in_filename = "http://hlsglsb.wasu.tv/1480682957527_561859.m3u8?action=hls&Contentid=CP23010020161201084109";
+						   //in_filename = "http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8";
 						   //in_filename = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
-	out_filename = "cuc_ieschool1.mp4";//输出文件名（Output file URL）	av_register_all();
+						   //in_filename = "http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8"; //嵌套一个，m3u8是完整的
+						   in_filename = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
+						   //in_filename = "sdghakd";
+	//out_filename = "cuc_ieschool1.mp4";//输出文件名（Output file URL）	av_register_all();
 https://dco4urblvsasc.cloudfront.net/811/81095_ywfZjAuP/game/500kbps.m3u8
 	//输入（Input）
+	//in_filename = "playlist-00001.ts";
+	//in_filename = "http://fnmm6ksw.vod1.hongshiyun.net/archive/hls/20160828/demo.m3u8";
+	//in_filename = "cuc_ieschool1.flv";
 	if ((ret = avformat_open_input(&ifmt_ctx, in_filename, 0, 0)) < 0) {
 		printf("Could not open input file.");
 		return -1;
